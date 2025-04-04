@@ -1,113 +1,345 @@
 <!DOCTYPE html>
 <html lang="ca">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pàgina Web de Lamin Manneh</title>
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #e3f2fd;
-            color: #333;
-        }
-        .container {
-            width: 80%;
-            max-width: 900px;
-            margin: 50px auto;
-            background: white;
-            padding: 30px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-        }
-        h1 {
-            color: #1565c0;
-            text-align: center;
-            font-size: 2.5em;
-        }
-        h2 {
-            color: #1976d2;
-            border-bottom: 2px solid #64b5f6;
-            padding-bottom: 5px;
-        }
-        p {
-            font-size: 18px;
-            color: #444;
-            text-align: justify;
-        }
-        .profile {
-            text-align: center;
-        }
-        .profile img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 4px solid #1565c0;
-            margin-top: 10px;
-        }
-        .section {
-            margin-top: 30px;
-            padding: 15px;
-            background: #bbdefb;
-            border-radius: 8px;
-        }
-        .contact-info {
-            text-align: center;
-            margin-top: 20px;
-            font-weight: bold;
-        }
-        a {
-            color: #0d47a1;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pàgina Web de Lamin Manneh</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --dark-blue: #001233;
+      --medium-blue: #002855;
+      --light-blue: #0353a4;
+      --accent-blue: #0466c8;
+      --grey: #5c677d;
+      --white: #ffffff;
+    }
+    /* Fondo degradado y posición relativa */
+    body {
+      font-family: "DM Sans", sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, var(--dark-blue), var(--light-blue));
+      color: var(--white);
+      position: relative;
+      overflow-x: hidden;
+    }
+    /* Fondo de olas animado */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/wave.png') repeat;
+      opacity: 0.15;
+      pointer-events: none;
+      animation: moveWaves 30s linear infinite;
+      z-index: 0;
+    }
+    @keyframes moveWaves {
+      from { background-position: 0 0; }
+      to { background-position: 1000px 0; }
+    }
+    /* Contenido principal */
+    .hero {
+      height: 70%;
+      margin: 0;
+      background: url('https://via.placeholder.com/1920x1080') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      margin-top: 10%;
+      position: relative;
+      z-index: 2;
+    }
+    .hero h1 {
+      font-size: 4em;
+      font-weight: bold;
+      margin: 0;
+    }
+    .hero p {
+      font-size: 1.5em;
+      margin-top: 10px;
+    }
+    /* Menú centrado en el hero */
+    nav {
+      margin-top: 20px;
+      display: flex;
+      gap: 20px;
+      background: var(--medium-blue);
+      padding: 10px 15px;
+      border-radius: 8px;
+      position: relative;
+      z-index: 1000;
+    }
+    nav a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 18px;
+      transition: color 0.3s;
+      cursor: pointer;
+    }
+    nav a.active {
+      color: var(--accent-blue);
+      font-weight: bold;
+    }
+    nav a:hover {
+      color: var(--accent-blue);
+    }
+    .container {
+      width: 90%;
+      max-width: none;
+      margin: 20px auto;
+      padding: 40px 20px;
+      text-align: left;
+      position: relative;
+      z-index: 2;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    h2 {
+      font-size: 2em;
+      color: var(--light-blue);
+    }
+    .section {
+      width: 100%;
+      padding: 20px;
+      font-size: 20px;
+      border-radius: 8px;
+      margin-top: 10px;
+      transition: opacity 0.6s ease-out, transform 0.3s;
+      opacity: 0;
+      transform: translateY(20px);
+      display: none;
+    }
+    .section.visible {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    a {
+      color: var(--accent-blue);
+      text-decoration: none;
+    }
+    /* Botón "Volver arriba" */
+    #backToTop {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: var(--accent-blue);
+      color: var(--white);
+      border: none;
+      padding: 10px 15px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      display: none;
+      z-index: 1001;
+      transition: opacity 0.3s;
+    }
+    #backToTop:hover {
+      background: var(--light-blue);
+    }
+    /* Animación de la ballena */
+   @keyframes whale-swim {
+  0% { 
+    transform: translateX(-10%);
+    opacity: 0.7;
+  }
+  95% { 
+    transform: translateX(100%);
+    opacity: 0.7;
+  }
+  100% { 
+    transform: translateX(110%);
+    opacity: 0;
+  }
+}
+
+    .whale {
+      position: absolute;
+      bottom: 20%;
+      left: 0;
+      background: url('./Carpeta/ballena.png') no-repeat;
+      background-size: contain;
+      width: 800px;
+      height: 500px;
+      animation: whale-swim 30s linear infinite;
+      z-index: 1;
+      opacity: 0.7;
+      filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.3));
+    }
+    /* Burbujas animades */
+    .bubble {
+      position: absolute;
+      bottom: -50px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: bubbleRise 6s linear infinite;
+    }
+    @keyframes bubbleRise {
+      0% {
+        transform: translateY(0) scale(0.8);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-300px) scale(1.2);
+        opacity: 0;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="profile">
-            <img src="https://via.placeholder.com/150" alt="Foto de perfil">
-            <h1>Lamin Manneh</h1>
-        </div>
-        
-        <div class="section">
-            <h2>Presentació</h2>
-            <p>Hola! Em dic Lamin Manneh i sóc un estudiant de Desenvolupament d'Aplicacions Web. M'apassiona la tecnologia i sempre estic buscant aprendre i créixer professionalment. Em considero una persona treballadora, efectiva i adaptable a qualsevol entorn.</p>
-        </div>
-        
-        <div class="section">
-            <h2>Habilitats Tècniques</h2>
-            <p>- Programació en HTML, CSS, JavaScript</p>
-            <p>- Coneixements en Vue, Python, Git, Ubuntu, CMD, Windows, PHP, C#</p>
-        </div>
+  <div class="hero">
+    <div class="whale"></div>
+    <h1>Lamin Manneh</h1>
+    <p>Desenvolupador web | Apassionat per la tecnologia</p>
+    <img src="C:\Users\Lanmin\Downloads\code-1076536.jpg" alt="Imatge de mostra" width="400" height="200">
+    <!-- Menú de navegación integrado -->
+    <nav>
+      <a data-target="presentacio" class="active">Presentació</a>
+      <a data-target="habilitats-tecniques">Habilitats Tècniques</a>
+      <a data-target="habilitats-personals">Habilitats Personals</a>
+      <a data-target="curriculum">Currículum</a>
+      <a data-target="projectes">Projectes</a>
+      <a data-target="pitch">Elevator Pitch</a>
+      <a data-target="contacte">Contacte</a>
+    </nav>
+  </div>
 
-        <div class="section">
-            <h2>Habilitats Personals</h2>
-            <p>- Desenvolupament web i resolució de problemes</p>
-            <p>- Adaptabilitat i treball en equip</p>
-            <p>- Capacitat per gestionar la pressió</p>
-            <p>- Persona amable i professional</p>
-        </div>
-        
-        <div class="section">
-            <h2>Currículum</h2>
-            <p>Pots descarregar el meu currículum aquí: <a href="#">Descarregar PDF</a></p>
-        </div>
-        
-        <div class="section">
-            <h2>Elevator Pitch</h2>
-            <p>Sóc un jove apassionat per la tecnologia i el desenvolupament web. Tot i estar en les primeres etapes de la meva carrera, tinc una gran motivació per aprendre i aportar valor en qualsevol projecte. Crec en la innovació, l'aprenentatge constant i la col·laboració com a claus per a l'èxit.</p>
-        </div>
-        
-        <div class="contact-info">
-            <h2>Contacte</h2>
-            <p>Email: laminmanneh226@gmail.com</p>
-            <p>Telèfon: +34 603028410</p>
-        </div>
+  <div class="container">
+    <div id="presentacio" class="section visible">
+      <h2>Presentació</h2>
+      <p>Des de petit, la programació sempre m’ha fascinat. Encara que no vaig tenir l’oportunitat d’apuntar-me a un curs des del principi, la curiositat per entendre com funcionaven les aplicacions i el programari em va portar a experimentar pel meu compte. Aquest interès natural em va impulsar a endinsar-me en el món del desenvolupament web, i actualment estic cursant un Grau Superior en Desenvolupament d’Aplicacions Web.</p>
+<p>A diferència de molts en aquest sector, que ho fan només per la sortida econòmica, jo visc la programació amb passió. No és només una feina per a mi, sinó una manera de <strong>crear, innovar i resoldre problemes</strong> d’una forma única. Cada línia de codi és un repte i una oportunitat d’aprendre i millorar.</p>
+<p>El meu objectiu és <strong>formar part de grans empreses tecnològiques</strong> per guanyar experiència i, en el futur, emprendre els meus propis projectes. Sempre busco reptes que em facin créixer professionalment i que em permetin portar la meva creativitat al següent nivell.</p>
+<p>He planificat el disseny d'aquesta pàgina pensant en el meu amor pel mar, ja que m’apassiona l'oceà i tot el que representa. La temàtica de les onades i la ballena reflecteix aquesta connexió amb el món marí.</p>
     </div>
+    <div id="habilitats-tecniques" class="section">
+      <h2>Habilitats Tècniques</h2>
+      <ul>
+        <li>Desenvolupament web amb HTML, CSS, JavaScript</li>
+        <li>Frameworks com Vue.js</li>
+        <li>Programació en Python, PHP, C#</li>
+        <li>Ús de Git per al control de versions</li>
+        <li>Administració bàsica de sistemes Ubuntu i Windows</li>
+        <li>Integració d’APIs públiques i locals</li>
+        <li>Experiència amb Docker i CI/CD</li>
+      </ul>
+    </div>
+    
+    <div id="habilitats-personals" class="section">
+      <h2>Habilitats Personals</h2>
+      <ul>
+        <li>Capacitat d'adaptació i aprenentatge ràpid</li>
+        <li>Treball en equip i comunicació efectiva</li>
+        <li>Passió pels reptes tecnològics</li>
+        <li>Constància i disciplina</li>
+        <li>Iniciativa i Creativitat</li>
+        <li>Persuasió i Flexibilitat</li>
+      </ul>
+    </div>
+    
+    <div id="curriculum" class="section">
+      <h2>Currículum</h2>
+      <p>Pots descarregar el meu currículum aquí: <a href="#">Descarregar PDF</a></p>
+    </div>
+    
+    <div id="projectes" class="section">
+      <h2>Projectes</h2>
+      <p>Actualment estic treballant amb un projecte</p>
+      
+      <h3>💰 Finances Personalitzades</h3>
+      <p>Una aplicació web destinada a ajudar les persones a gestionar millor els seus ingressos i despeses, amb eines d’anàlisi financera i pressupostos personalitzats.</p>
+      <h3>Mentres tant la que tinc acabada es.</h3>
+      <h3>🍣 Umami - Restaurant Japonès</h3>
+      <p>Viag desenvolupar la web d’un restaurant de menjar japonès anomenat <strong>Umami</strong>. Aquesta plataforma permetrà als clients explorar el menú, fer reserves en línia i conèixer més sobre la cultura gastronòmica del Japó.</p>
+      
+      <img src="C:\Users\Lanmin\Desktop\Carpeta\Captura de pantalla 2025-04-03 005626.png" alt="Captura de la web de Umami" width="1000" height="550">
+      <img src="C:\Users\Lanmin\Desktop\Carpeta\umami.png" alt="Captura de la web de Umami" width="600" height="300">
+      <img src="C:\Users\Lanmin\Desktop\Carpeta\umami2.png" alt="Captura de la web de Umami" width="300" height="300">
+      <img src="C:\Users\Lanmin\Desktop\Carpeta\umami3.png" alt="Captura de la web de Umami" width="700" height="350">
+      <img src="C:\Users\Lanmin\Desktop\Carpeta\umami4.png" alt="Captura de la web de Umami" width="700" height="350">
+    </div>
+    
+    
+    <div id="pitch" class="section">
+      <h2>Elevator Pitch</h2>
+      <p>La meva passió per la tecnologia i els reptes m'impulsa a voler formar part de grans empreses, on pugui aprendre, créixer i aportar valor. Sempre busco nous desafiaments per millorar les meves habilitats i crear solucions innovadores.</p>
+    </div>
+    
+    <div id="contacte" class="section">
+      <h2>Contacte</h2>
+      <p>Email: <a href="mailto:laminmanneh226@gmail.com">laminmanneh226@gmail.com</a></p>
+      <p>Telèfon: <a href="tel:+34603028410">+34 603028410</a></p>
+    </div>
+  </div>
+
+  <!-- Botó "Volver arriba" -->
+  <button id="backToTop">↑ Pujar</button>
+
+  <!-- Burbujas animades -->
+  <div class="bubble" style="left: 20%; animation-duration: 8s; width: 15px; height: 15px;"></div>
+  <div class="bubble" style="left: 40%; animation-duration: 7s; width: 20px; height: 20px;"></div>
+  <div class="bubble" style="left: 60%; animation-duration: 9s; width: 10px; height: 10px;"></div>
+  <div class="bubble" style="left: 80%; animation-duration: 6s; width: 18px; height: 18px;"></div>
+
+  <!-- JavaScript per gestionar la navegació per clic -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Recollir tots els enllaços del menú
+      const navLinks = document.querySelectorAll('nav a');
+      // Recollir totes les seccions
+      const sections = document.querySelectorAll('.section');
+      
+      // Funció per amagar totes les seccions i treure classes actives
+      function hideAllSections() {
+        sections.forEach(section => {
+          section.classList.remove('visible');
+        });
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+        });
+      }
+      
+      // Afegir esdeveniment a cada enllaç
+      navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute('data-target');
+          const targetSection = document.getElementById(targetId);
+          if (targetSection) {
+            hideAllSections();
+            targetSection.classList.add('visible');
+            link.classList.add('active');
+            // Scroll suau fins al contenidor
+            targetSection.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+      
+      /* Botó "Volver arriba" */
+      const backToTop = document.getElementById('backToTop');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+          backToTop.style.display = 'block';
+        } else {
+          backToTop.style.display = 'none';
+        }
+      });
+      backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+  </script>
 </body>
 </html>
